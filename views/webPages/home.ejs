@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextTrove - Home</title>
+  <link rel="icon" href="TextTrove_Final.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f7f8fc;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4a90e2;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar .logo a {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    .navbar .nav-links li a {
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .navbar .nav-links li a:hover {
+      color: #ffdf5c;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, #4a90e2, #74b9ff);
+      color: #fff;
+      border-radius: 12px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 15px;
+    }
+    .hero button {
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      background-color: #ffdf5c;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      margin-top: 20px;
+    }
+    .hero button:hover {
+      background-color: #ffd43b;
+      transform: translateY(-3px);
+    }
+
+    /* Categories Section */
+    .categories {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .category {
+      flex: 1;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .category img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+    .category h2 {
+      font-size: 1.8rem;
+      color: #4a90e2;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .category p {
+      color: #666;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #222;
+      color: #f4f4f9;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+    .footer-brand, .footer-links, .footer-social, .footer-contact {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-brand h2, .footer-links h3, .footer-social h3, .footer-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffdf5c;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #f4f4f9;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: #ffdf5c;
+    }
+    .social-icons a {
+      margin-right: 15px;
+      transition: transform 0.3s;
+    }
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.1);
+    }
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin: 5px 0;
+    }
+    .footer-contact a {
+      color: #ffdf5c;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo"><a href="/">TextTrove</a></div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/quotes">Quotes</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/articles">Articles</a></li>
+        <% if (!isAuthenticated) { %>
+          <!-- Show these links only if the user is NOT logged in -->
+          <li><a href="/login">Login</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+        <% } else { %>
+          <!-- Show these links only if the user IS logged in -->
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/logout">Logout</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="container">
+    <section class="hero">
+      <h1>Welcome to TextTrove</h1>
+      <p>Explore, read, and get inspired with the best quotes, books, and articles.</p>
+      <button onclick="window.location.href='/signup'">Get Started</button>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+      <div class="category">
+        <a href="/quotes">
+          <img src="https://img.icons8.com/?size=100&id=LVB8kCgWT95b&format=png&color=000000" alt="Quotes">
+          <h2>Quotes</h2>
+          <p>Get inspired with the wisdom of great minds and thought leaders.</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="/books">
+          <img src="https://img.icons8.com/?size=100&id=113798&format=png&color=000000" alt="Books">
+          <h2>Books</h2>
+          <p>Dive into a world of knowledge and stories through a curated selection of books.</p>
+        </a>
+      </div>
+      <div class="category">
+        <a href="/articles">
+          <img src="https://img.icons8.com/?size=100&id=dT8DNMs3wWMB&format=png&color=000000" alt="Articles">
+          <h2>Articles</h2>
+          <p>Stay updated with the latest articles written by our community of authors.</p>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>TextTrove</h2>
+        <p>Your gateway to knowledge, insights, and inspiration. Explore quotes, books, and articles from a world of creators.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/books">Books</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms & Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/cookies">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/facebook-new.png" alt="Facebook">
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/twitter.png" alt="Twitter">
+          </a>
+          <a href="https://linkedin.com/in/raman-singh-417239219/" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/linkedin.png" alt="LinkedIn">
+          </a>
+          <a href="https://instagram.com/texttrove_official" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/instagram-new.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:admin@texttrove.in">admin@texttrove.in</a></p>
+        <p>Phone: +91 964 847 0308</p>
+        <p>Address: Kushinagar, Uttar Pradesh, INDIA</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 TextTrove. All rights reserved.</p>
+      <p>Crafted with ♥ by Raman</p>
+    </div>
+  </footer>
+</body>
+</html>
